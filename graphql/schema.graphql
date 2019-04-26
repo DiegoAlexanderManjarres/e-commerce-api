@@ -1,0 +1,96 @@
+scalar Upload
+
+type Query {
+   getProducts(limit: Int): [Product!]!
+   getProduct(productId: ID!): Product!
+   getCart: User
+}
+
+type Mutation {
+   getSetGuest: Boolean
+   createUser(userData: InputUser): User!
+   userLogin(email: String!, password: String!): UserAuth!
+   createProduct(productData: InputProduct!): Product!
+   updateProduct(productData: UpdateInputProduct!, productId: ID!): Product!
+   deleteProduct(productId: ID!): Product!
+   addToCart(productId: ID!, quantity: Int): User!
+   removeFromCart(productId: ID!): User!
+   updateCartQuantity(productId: ID!, quantity: Int!): User!
+   ImagesUpload(ImageFiles: [Upload]): [ImageFile!]!
+}
+
+type ImageFile {
+   _id: ID!
+   url: String!
+   public_id: String!
+}
+
+type UserAuth {
+   token: String!
+   user: User!   
+}
+
+type Cart {
+   products: [ProductQTY!]!
+   subtotal: Float!
+}
+
+type ProductQTY {
+   product: Product!
+   quantity: Int!
+}
+
+type User {
+   _id: ID!
+   firstName: String!
+   lastName: String!
+   role: RoleTypes!
+   email: String!
+   password: String!
+   emailOffers: Boolean!
+   createdAt: String!
+   updatedAt: String!
+   cart: Cart
+}
+
+type Product {
+   _id: ID!
+   name: String!
+   description: String!
+   imagesUrls: [ImageFile!]!
+   price: Float!
+   inStock: Boolean!  
+   createdAt: String!
+   updatedAt: String!    
+}
+
+input InputUser {
+   firstName: String!
+   lastName: String!
+   email: String!
+   password: String!
+   emailOffers: Boolean!
+} 
+
+input InputProduct {
+   name: String!
+   description: String!
+   images: [Upload!]!
+   price: Float!
+   inStock: Boolean!
+}
+
+input UpdateInputProduct {
+   name: String
+   description: String
+   images: [Upload]
+   price: Float
+   inStock: Boolean
+}
+
+enum RoleTypes {
+   CUSTOMER
+   ADMINISTRATOR
+   GUEST
+}
+

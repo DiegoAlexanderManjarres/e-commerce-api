@@ -14,7 +14,7 @@
       "nodemon": "^1.18.10"
    },
    "dependencies": {
-      "bcrypt": "^3.0.4",
+      "bcrypt": "^5.0.0",
       "body-parser": "^1.18.3",
       "cloudinary": "^1.13.2",
       "connect-mongodb-session": "^2.1.1",
